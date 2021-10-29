@@ -1,3 +1,14 @@
-# TEAM: theonions1
+# TEAM: Story Improv by TheOnionsOne
 
-<p> Roster: Ishraq Mahid (pm), Lucas Tom-Wong, Tomas Acuna </p>
+## Roster: 
+* Ishraq Mahid (PM)
+* Lucas Tom-Wong (Front End Developer)
+* Tomas Acuña (Database Maintainer)
+* All (snake management)
+
+## Haikus:
+
+<p> Goggles are worn here <br>
+    Eyes fill with sweet salty tears <br>
+    The Big Onion Wins.
+</p>
