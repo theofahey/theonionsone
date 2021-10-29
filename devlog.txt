@@ -1,3 +1,3 @@
 ishraqM -- 2021-10-28 8:00PM -- Initializing repo with README.md, devlog.txt, and design.pdf (with revisions made based on feedback)
 
-
+lucasTW -- 2021-10-28 9:26PM -- Added team flag via upload to the repo
