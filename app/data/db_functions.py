@@ -15,6 +15,11 @@ def value_exists(db, table_name, field_name, value):
     c.execute("SELECT 1 FROM " + table_name + " WHERE " + field_name + " = '" + value + "'")
     return bool(c.fetchone())
 
+def quote(value):
+    return "'" + value + "'"
+
 def add_values(db, table_name, values):
-    value_string = list_to_string(values)
+    c = db.cursor()
+    quoted_values = map(quote, values)
+    value_string = list_to_string(quoted_values)
     c.execute("INSERT INTO " + table_name + " VALUES " + value_string)
