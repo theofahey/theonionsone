@@ -1,20 +1,17 @@
-from db_functions import *
-from sqlite3 import connect
+from data_functions import *
 
-def check_for_value(db, table_name, field_name, value):
+def check_username(username):
     verb = None
-    if value_exists(db, table_name, field_name, value):
-        verb = "exists"
+    if user_exists(username):
+        verb = "is"
     else:
-        verb = "doesn't exist"
-    print(f"{field_name} value {value} {verb} in {table_name}")
+        verb = "is not"
+    print(f"{username} {verb} a user")
 
-
-discobandit = connect("discobandit.db")
-create_table(discobandit, "users", ["username", "password"])
-add_values(discobandit, "users", ["bob", "goodpassword"])
-add_values(discobandit, "users", ["joe", "okaypassword"])
-print_table(discobandit, "users")
-check_for_value(discobandit, "users", "username", "bob")
-check_for_value(discobandit, "users", "username", "joe")
-check_for_value(discobandit, "users", "username", "carlos")
+clear_users()
+add_user("bob", "goodpassword")
+add_user("joe", "okaypassword")
+check_username("bob")
+check_username("joe")
+check_username("carlos")
+print_users()
