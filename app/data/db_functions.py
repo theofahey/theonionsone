@@ -32,3 +32,8 @@ def print_table(db, table_name):
     rows = c.fetchall()
     for row in rows:
         print(row)
+
+def clear_table(db, table_name):
+    c = db.cursor()
+    c.execute(f"DELETE FROM {table_name}")
+    db.commit()
