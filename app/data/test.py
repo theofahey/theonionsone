@@ -1,7 +1,6 @@
 from data_functions import *
 
 def check_username(username):
-    verb = None
     if user_exists(username):
         verb = "is"
     else:
