@@ -2,7 +2,7 @@ from db_functions import *
 from sqlite3 import connect
 def printDB(db, table_name):
     c = db.cursor()
-    c.execute("SELECT * FROM " + table_name)
+    c.execute(f"SELECT * FROM {table_name}")
     rows = c.fetchall()
     for row in rows:
         print(row)
