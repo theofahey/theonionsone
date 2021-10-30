@@ -9,7 +9,7 @@ def create_table(db, table_name, field_names):
     fields = map(add_type, field_names)
     field_string = list_to_string(fields)
     c.execute(f"CREATE TABLE IF NOT EXISTS {table_name} {field_string}")
-    db.commit()
+    db.commit
 
 def value_exists(db, table_name, field_name, value):
     c = db.cursor()
@@ -25,3 +25,10 @@ def add_values(db, table_name, values):
     value_string = list_to_string(quoted_values)
     c.execute(f"INSERT INTO {table_name} VALUES {value_string}")
     db.commit()
+
+def print_table(db, table_name):
+    c = db.cursor()
+    c.execute(f"SELECT * FROM {table_name}")
+    rows = c.fetchall()
+    for row in rows:
+        print(row)
