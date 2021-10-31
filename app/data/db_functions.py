@@ -14,16 +14,16 @@ def create_table(db, table_name, field_names):
     c.execute(f"CREATE TABLE IF NOT EXISTS {table_name} {field_string}")
     db.commit()
 
-def find_value_helper(db, table_name, field_name, value, target_field):
+def get_value_helper(db, table_name, field_name, value, target_field):
     c = db.cursor()
     c.execute(f"SELECT {target_field} FROM {table_name} WHERE {field_name} = '{value}'")
     return c.fetchone()
 
-def find_value(db, table_name, field_name, value, target_field):
-    return find_value_helper(db, table_name, field_name, value, target_field)[0]
+def get_value(db, table_name, field_name, value, target_field):
+    return get_value_helper(db, table_name, field_name, value, target_field)[0]
 
 def value_exists(db, table_name, field_name, value):
-    return bool(find_value_helper(db, table_name, field_name, value, "1"))
+    return bool(get_value_helper(db, table_name, field_name, value, "1"))
 
 def add_values(db, table_name, values):
     c = db.cursor()
