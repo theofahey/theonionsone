@@ -9,12 +9,18 @@ def create_table(db, table_name, field_names):
     fields = map(add_type, field_names)
     field_string = list_to_string(fields)
     c.execute(f"CREATE TABLE IF NOT EXISTS {table_name} {field_string}")
-    db.commit
+    db.commit()
+
+def find_value_helper(db, table_name, field_name, value, target_field):
+    c = db.cursor()
+    c.execute(f"SELECT {target_field} FROM {table_name} WHERE {field_name} = '{value}'")
+    return c.fetchone()
+
+def find_value(db, table_name, search_field_name, search_value, target_field):
+    return find_value_helper(db, table_name, search_field_name, search_value, target_field)[0]
 
 def value_exists(db, table_name, field_name, value):
-    c = db.cursor()
-    c.execute(f"SELECT 1 FROM {table_name} WHERE {field_name} = '{value}'")
-    return bool(c.fetchone())
+    return bool(find_value_helper(db, table_name, field_name, value, "1"))
 
 def quote(value):
     return f"'{value}'"

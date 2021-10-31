@@ -16,3 +16,7 @@ def print_users():
 def clear_users():
     data = connect("data.db")
     clear_table(data, "users")
+
+def get_password(username):
+    data = connect("data.db")
+    return find_value(data, "users", "username", username, "password")
