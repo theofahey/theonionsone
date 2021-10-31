@@ -19,8 +19,8 @@ def find_value_helper(db, table_name, field_name, value, target_field):
     c.execute(f"SELECT {target_field} FROM {table_name} WHERE {field_name} = '{value}'")
     return c.fetchone()
 
-def find_value(db, table_name, search_field_name, search_value, target_field):
-    return find_value_helper(db, table_name, search_field_name, search_value, target_field)[0]
+def find_value(db, table_name, field_name, value, target_field):
+    return find_value_helper(db, table_name, field_name, value, target_field)[0]
 
 def value_exists(db, table_name, field_name, value):
     return bool(find_value_helper(db, table_name, field_name, value, "1"))
