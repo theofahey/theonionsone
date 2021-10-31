@@ -4,6 +4,9 @@ def list_to_string(lst):
 def add_type(field_name):
     return f"{field_name} TEXT"
 
+def quote(value):
+    return f"'{value}'"
+
 def create_table(db, table_name, field_names):
     c = db.cursor()
     fields = map(add_type, field_names)
@@ -21,9 +24,6 @@ def find_value(db, table_name, search_field_name, search_value, target_field):
 
 def value_exists(db, table_name, field_name, value):
     return bool(find_value_helper(db, table_name, field_name, value, "1"))
-
-def quote(value):
-    return f"'{value}'"
 
 def add_values(db, table_name, values):
     c = db.cursor()
