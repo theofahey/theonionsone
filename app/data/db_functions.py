@@ -1,3 +1,7 @@
+from sqlite3 import connect
+
+db = connect("data.db")
+
 def list_to_string(lst):
     return "(" + ", ".join(lst) + ")"
 
