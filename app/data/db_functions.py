@@ -29,7 +29,7 @@ def get_value(db, table_name, field_name, value, target_field):
 def value_exists(db, table_name, field_name, value):
     return bool(get_value_helper(db, table_name, field_name, value, "1"))
 
-def change_value(db, table_name, field_name, value, target_field, new_value):
+def set_value(db, table_name, field_name, value, target_field, new_value):
     c = db.cursor()
     c.execute(f"UPDATE {table_name} SET {target_field} = '{new_value}' WHERE {field_name} = '{value}'")
     db.commit()

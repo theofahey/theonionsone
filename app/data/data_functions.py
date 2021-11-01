@@ -37,8 +37,8 @@ def get_full_story(title):
 
 def add_new_part(title, new_part):
     new_story = get_full_story(title)
-    change_value(data, "stories", "title", title, "story", new_story)
-    change_value(data, "stories", "title", title, "new_part", new_part)
+    set_value(data, "stories", "title", title, "story", new_story)
+    set_value(data, "stories", "title", title, "new_part", new_part)
 
 #just for testing:
 def print_users():
@@ -54,4 +54,4 @@ def get_password(username):
     return get_value(data, "users", "username", username, "password")
 
 def change_password(username, new_password):
-    change_value(data, "users", "username", username, "password", new_password)
+    set_value(data, "users", "username", username, "password", new_password)
