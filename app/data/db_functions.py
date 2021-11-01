@@ -26,16 +26,16 @@ def set_value(db, table_name, field_name, value, target_field, new_value):
     c.execute(f"UPDATE {table_name} SET {target_field} = '{new_value}' WHERE {field_name} = '{value}'")
     db.commit()
 
-def get_value_helper(db, table_name, field_name, value, target_field):
+def get_value_list(db, table_name, field_name, value, target_field):
     c = db.cursor()
     c.execute(f"SELECT {target_field} FROM {table_name} WHERE {field_name} = '{value}'")
     return c.fetchone()
 
 def value_exists(db, table_name, field_name, value):
-    return bool(get_value_helper(db, table_name, field_name, value, "1"))
+    return bool(get_value_list(db, table_name, field_name, value, "1"))
 
 def get_value(db, table_name, field_name, value, target_field):
-    return get_value_helper(db, table_name, field_name, value, target_field)[0]
+    return get_value_list(db, table_name, field_name, value, target_field)[0]
 
 #just for testing:
 def clear_table(db, table_name):
