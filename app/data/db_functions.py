@@ -41,14 +41,15 @@ def add_values(db, table_name, values):
     c.execute(f"INSERT INTO {table_name} VALUES {value_string}")
     db.commit()
 
+#just for testing:
+def clear_table(db, table_name):
+    c = db.cursor()
+    c.execute(f"DELETE FROM {table_name}")
+    db.commit()
+
 def print_table(db, table_name):
     c = db.cursor()
     c.execute(f"SELECT * FROM {table_name}")
     rows = c.fetchall()
     for row in rows:
         print(row)
-
-def clear_table(db, table_name):
-    c = db.cursor()
-    c.execute(f"DELETE FROM {table_name}")
-    db.commit()
