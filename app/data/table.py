@@ -14,7 +14,7 @@ class Table:
         self.search_field = search_field
         self.c = db.cursor()
     
-    def add_values(values):
+    def add_values(self, values):
         quoted_values = map(quote, values)
         value_string = list_to_string(quoted_values)
         self.c.execute(f"INSERT INTO {self.table_name} VALUES {value_string}")
@@ -33,7 +33,7 @@ class Table:
         return bool(value_list)
     
     def get_value(self, search, field):
-        value_list = self.get_value(search, field)
+        value_list = self.get_value_list(search, field)
         return value_list[0]
     
     def clear(self):
