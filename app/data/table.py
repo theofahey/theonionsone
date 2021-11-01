@@ -29,11 +29,11 @@ class Table:
         return self.c.fetchone()
     
     def value_exists(self, search):
-        value_list = get_value_list(search, "1")
+        value_list = self.get_value_list(search, "1")
         return bool(value_list)
     
     def get_value(self, search, field):
-        value_list = get_value(search, field)
+        value_list = self.get_value(search, field)
         return value_list[0]
     
     def clear(self):
