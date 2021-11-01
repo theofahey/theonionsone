@@ -41,17 +41,8 @@ def add_new_part(title, new_part):
     set_value(data, "stories", "title", title, "new_part", new_part)
 
 #just for testing:
-def print_users():
-    print_table(data, "users")
-
 def clear_users():
     clear_table(data, "users")
 
 def clear_stories():
     clear_table(data, "stories")
-
-def get_password(username):
-    return get_value(data, "users", "username", username, "password")
-
-def change_password(username, new_password):
-    set_value(data, "users", "username", username, "password", new_password)
