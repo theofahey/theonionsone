@@ -14,7 +14,7 @@ def add_user(username, password):
     add_values(data, "users", [username, password])
 
 def story_exists(title):
-    return value_exists(data, "users", "username", username)
+    return value_exists(data, "stories", "title", username)
 
 def add_story(title):
     add_values(data, "stories", [title, "", ""])
