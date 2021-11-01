@@ -8,9 +8,9 @@ stories = Table(data, "stories", "title")
 def user_exists(username):
     return users.value_exists(username)
 
-def check_password(username, password):
-    correct_password = users.get_value(username, "password")
-    return password == correct_password
+def correct_password(username, password):
+    real_password = users.get_value(username, "password")
+    return password == real_password
 
 def add_user(username, password):
     users.add_values([username, password])

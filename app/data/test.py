@@ -8,7 +8,7 @@ def username_test(username):
     print(f"{username} is{no} a user")
 
 def password_test(username, password):
-    if check_password(username, password):
+    if correct_password(username, password):
         no = ""
     else:
         no = " not"
