@@ -15,6 +15,8 @@ def password_test(username, password):
     print(f"{password} is{no} the correct password for {username}")
 
 clear_users()
+clear_stories()
+
 add_user("bob", "goodpassword")
 add_user("joe", "okaypassword")
 username_test("bob")
@@ -23,3 +25,10 @@ username_test("carlos")
 password_test("bob", "goodpassword")
 password_test("joe", "okaypassword")
 password_test("bob", "idk")
+
+add_story("harry potter")
+add_new_part("harry potter", "there once was a boy named harry")
+add_new_part("harry potter", "he did stuff at school")
+add_new_part("harry potter", "he saved the world or something yay")
+print(get_new_part("harry potter"))
+print(get_full_story("harry potter"))
