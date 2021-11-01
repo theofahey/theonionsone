@@ -31,11 +31,11 @@ def get_value_helper(db, table_name, field_name, value, target_field):
     c.execute(f"SELECT {target_field} FROM {table_name} WHERE {field_name} = '{value}'")
     return c.fetchone()
 
-def get_value(db, table_name, field_name, value, target_field):
-    return get_value_helper(db, table_name, field_name, value, target_field)[0]
-
 def value_exists(db, table_name, field_name, value):
     return bool(get_value_helper(db, table_name, field_name, value, "1"))
+
+def get_value(db, table_name, field_name, value, target_field):
+    return get_value_helper(db, table_name, field_name, value, target_field)[0]
 
 #just for testing:
 def clear_table(db, table_name):
