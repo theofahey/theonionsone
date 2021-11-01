@@ -1,29 +1,31 @@
-from db_functions import *
 from sqlite3 import connect
+from table import Table
 
 data = connect("data.db")
+users = Table(data, "users", "username")
+stories = Table(data, "stories", "title")
 
 def user_exists(username):
-    return value_exists(data, "users", "username", username)
+    return users.value_exists(username)
 
 def check_password(username, password):
-    correct_password = get_value(data, "users", "username", username, "password")
+    correct_password = users.get_value(username, "password")
     return password == correct_password
 
 def add_user(username, password):
-    add_values(data, "users", [username, password])
+    users.add_values([username, password])
 
 def story_exists(title):
-    return value_exists(data, "stories", "title", username)
+    return stories.value_exists(username)
 
 def add_story(title):
-    add_values(data, "stories", [title, "", ""])
+    stories.add_values([title, "", ""])
 
 def get_new_part(title):
-    return get_value(data, "stories", "title", title, "new_part")
+    return stories.get_value(title, "new_part")
 
 def get_story(title):
-    return get_value(data, "stories", "title", title, "story")
+    return stories.get_value(title, "story")
 
 def attach(story, new_part):
     if story == "":
@@ -37,12 +39,12 @@ def get_full_story(title):
 
 def add_new_part(title, new_part):
     new_story = get_full_story(title)
-    set_value(data, "stories", "title", title, "story", new_story)
-    set_value(data, "stories", "title", title, "new_part", new_part)
+    stories.set_value(title, "story", new_story)
+    stories.set_value(title, "new_part", new_part)
 
 #just for testing:
 def clear_users():
-    clear_table(data, "users")
+    users.clear()
 
 def clear_stories():
-    clear_table(data, "stories")
+    stories.clear()
