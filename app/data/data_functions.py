@@ -30,22 +30,22 @@ def add_story(title):
 def get_new_part(title):
     return stories.get_value(title, "new_part")
 
-def get_story(title):
-    return stories.get_value(title, "story")
+def get_old_part(title):
+    return stories.get_value(title, "old_part")
 
-def attach(story, new_part):
-    if story == "":
+def attach(old_part, new_part):
+    if old_part == "":
         return new_part
-    return story + "\n\n" + new_part
+    return old_part + "\n\n" + new_part
 
 def get_full_story(title):
-    story = get_story(title)
+    old_part = get_old_part(title)
     new_part = get_new_part(title)
-    return attach(story, new_part)
+    return attach(old_part, new_part)
 
 def add_new_part(title, new_part):
     new_story = get_full_story(title)
-    stories.set_value(title, "story", new_story)
+    stories.set_value(title, "old_part", new_story)
     stories.set_value(title, "new_part", new_part)
 
 #just for testing:
@@ -55,4 +55,4 @@ def clear_all():
 
 def initialize():
     users.create(["username", "password"])
-    stories.create(["title", "story", "new_part"])
+    stories.create(["title", "old_part", "new_part"])
