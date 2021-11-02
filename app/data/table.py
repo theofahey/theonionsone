@@ -38,4 +38,5 @@ class Table:
     
     def clear(self):
         self.c.execute(f"DELETE FROM {self.table_name}")
+        self.c.execute("VACUUM")
         self.db.commit()
