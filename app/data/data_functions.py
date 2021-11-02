@@ -5,6 +5,9 @@ data = connect("data.db", isolation_level = None)
 users = Table(data, "users", "username")
 stories = Table(data, "stories", "title")
 
+def get_usernames():
+    return users.get_main_values()
+
 def user_exists(username):
     return users.value_exists(username)
 
@@ -14,6 +17,9 @@ def correct_password(username, password):
 
 def add_user(username, password):
     users.add_values([username, password])
+
+def get_titles():
+    return stories.get_main_values()
 
 def story_exists(title):
     return stories.value_exists(title)

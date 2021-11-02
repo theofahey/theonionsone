@@ -7,6 +7,9 @@ def add_type(field_name):
 def quote(value):
     return f"'{value}'"
 
+def first(lst):
+    return lst[0]
+
 class Table:
     def __init__(self, db, table_name, search_field):
         self.db = db
@@ -23,6 +26,11 @@ class Table:
     def set_value(self, search, field, value):
         self.c.execute(f"UPDATE {self.table_name} SET {field} = '{value}' WHERE {self.search_field} = '{search}'")
         self.db.commit()
+    
+    def get_main_values(self):
+        self.c.execute(f"SELECT {self.search_field} FROM {self.table_name}")
+        value_lists = self.c.fetchall()
+        return map(first, value_lists)
     
     def get_value_list(self, search, field):
         self.c.execute(f"SELECT {field} FROM {self.table_name} WHERE {self.search_field} = '{search}'")
