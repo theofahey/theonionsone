@@ -1,7 +1,7 @@
 from sqlite3 import connect
 from table import Table
 
-data = connect("data.db")
+data = connect("data.db", isolation_level = None)
 users = Table(data, "users", "username")
 stories = Table(data, "stories", "title")
 
@@ -48,3 +48,7 @@ def clear_users():
 
 def clear_stories():
     stories.clear()
+
+def initialize():
+    users.create(["username", "password"])
+    stories.create(["title", "story", "new_part"])
