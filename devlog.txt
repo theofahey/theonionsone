@@ -3,3 +3,5 @@ ishraqM -- 2021-10-28 8:00PM -- Initializing repo with README.md, devlog.txt, an
 lucasTW -- 2021-10-28 9:26PM -- Added team flag via upload to the repo
 
 lucasTW - 2021-10-30 9:11PM -- Added designwiki0.pdf
+
+lucasTW - 2021-11-1 8:38AM -- Added testfolder0
