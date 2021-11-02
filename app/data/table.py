@@ -40,3 +40,9 @@ class Table:
         self.c.execute(f"DELETE FROM {self.table_name}")
         self.c.execute("VACUUM")
         self.db.commit()
+    
+    def create(self, field_names):
+        fields = map(add_type, field_names)
+        field_string = list_to_string(fields)
+        self.c.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} {field_string}")
+        self.db.commit()
