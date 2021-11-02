@@ -4,14 +4,21 @@ def username_test(username):
     if user_exists(username):
         no = ""
     else:
-        no = " not"
+        no = " NOT"
     print(f"{username} is{no} a user")
+
+def story_test(title):
+    if story_exists(title):
+        no = ""
+    else:
+        no = " NOT"
+    print(f"{title} is{no} a story")
 
 def password_test(username, password):
     if correct_password(username, password):
         no = ""
     else:
-        no = " not"
+        no = " NOT"
     print(f"{password} is{no} the correct password for {username}")
 
 clear_all()
@@ -31,3 +38,5 @@ add_new_part("harry potter", "he did stuff at school")
 add_new_part("harry potter", "he saved the world or something yay")
 print(get_new_part("harry potter"))
 print(get_full_story("harry potter"))
+story_test("harry potter")
+story_test("skyward")
