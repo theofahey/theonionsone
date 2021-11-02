@@ -43,10 +43,8 @@ def add_new_part(title, new_part):
     stories.set_value(title, "new_part", new_part)
 
 #just for testing:
-def clear_users():
+def clear_all():
     users.clear()
-
-def clear_stories():
     stories.clear()
 
 def initialize():

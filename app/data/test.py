@@ -14,8 +14,7 @@ def password_test(username, password):
         no = " not"
     print(f"{password} is{no} the correct password for {username}")
 
-clear_users()
-clear_stories()
+clear_all()
 
 add_user("bob", "goodpassword")
 add_user("joe", "okaypassword")
