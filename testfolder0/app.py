@@ -9,13 +9,17 @@ debug = True
 def disp_loginpage():
     return render_template('login_Page.html')
 
-@app.route("/auth_ed", methods=['GET', 'POST'])
-def disp_homepage():
-    return render_template('home_Page.html')
-
 @app.route("/register", methods=['GET', 'POST'])
 def disp_registerpage():
     return render_template('register.html')
+
+@app.route("/logout", methods=['GET', 'POST'])
+def logout():
+    return render_template('login_Page.html')
+
+@app.route("/auth_ed", methods=['GET', 'POST'])
+def disp_homepage():
+    return render_template('home_Page.html')
 
 def main():
     """
