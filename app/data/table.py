@@ -28,13 +28,13 @@ class Table:
         self.c.execute(f"SELECT {field} FROM {self.table_name} WHERE {self.search_field} = '{search}'")
         return self.c.fetchone()
     
-    def value_exists(self, search):
-        value_list = self.get_value_list(search, "1")
-        return bool(value_list)
-    
     def get_value(self, search, field):
         value_list = self.get_value_list(search, field)
         return value_list[0]
+    
+    def value_exists(self, search):
+        value_list = self.get_value_list(search, "1")
+        return bool(value_list)
     
     def clear(self):
         self.c.execute(f"DELETE FROM {self.table_name}")
