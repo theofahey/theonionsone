@@ -1,0 +1,36 @@
+<!--
+The Onions - Ishraq Mahid, Lucas Tom-Wong (LTW), Tomas Acuna
+SoftDev
+P00-homepage -- Moving Slowly -- No Place Like Home
+2021-10-29
+ -->
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title> Register </title>
+</head>
+
+<body>
+    <p>
+      {{extra_Message}}
+    </p>
+    <h1>
+      Please enter your new login information.
+    </h1>
+    <form action="/check_register" method = "GET">
+        Username:
+        <input type="text" name="username">
+        <br>
+        Password:
+        <input type="password" name="password">
+        <br>
+        Confirm Password:
+        <input type="password" name="confirm_password">
+        <br>
+        <input type="submit" value="Register"> <!-- Allows you to return text as a username and press a submit button -->
+    </form>
+</body>
+<!--First body for entering login credentials -->
+</html>
