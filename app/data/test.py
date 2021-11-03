@@ -21,6 +21,7 @@ def password_test(username, password):
         no = " NOT"
     print(f"{password} is{no} the correct password for {username}")
 
+initialize()
 clear_all()
 
 add_user("bob", "goodpassword")
@@ -40,10 +41,13 @@ add_story("lord of the rings")
 add_new_part("lord of the rings", "frodo baggins liked submarines")
 add_new_part("lord of the rings", "he sailed through the oceans")
 add_new_part("lord of the rings", "he sailed through all the streams")
+print("\nmost recent add to harry potter:")
 print(get_new_part("harry potter"))
+print("\nentire text of harry potter:")
 print(get_full_story("harry potter"))
+print()
 story_test("harry potter")
 story_test("lord of the rings")
-story_test("skyward")
+story_test("cheese")
 print(list(get_usernames()))
 print(list(get_titles()))
