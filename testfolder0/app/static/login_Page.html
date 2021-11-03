@@ -13,24 +13,14 @@ P00-homepage -- Moving Slowly -- No Place Like Home
 </head>
 
 <body>
-  <p>
-      {{extra_Message}}
-  </p>
-  <p> Welcome to story improv </p>
-</body>
-
-<body>
     <h1>
-      Please enter your login information.
+      Please enter your login information. We won't steal it or anything... lol
     </h1>
     <form action="/auth_ed" method = "GET">
-        Username:
         <input type="text" name="username">
-        <br>
-        Password:
         <input type="password" name="password">
-        <br>
-        <input type="submit" value="Login""> <!-- Allows you to return text as a username and press a submit button -->
+
+        <input type="submit" name="submit"> <!-- Allows you to return text as a username and press a submit button -->
     </form>
 </body>
 <!--First body for entering login credentials -->
