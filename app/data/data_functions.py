@@ -24,8 +24,10 @@ def get_titles():
 def story_exists(title):
     return stories.value_exists(title)
 
-def add_story(title):
+def add_story(title, username):
     stories.add_values([title, "", ""])
+    editors = Table(data, title, "username")
+    editors.create(["username"])
 
 def get_old_part(title):
     return stories.get_value(title, "old_part")
@@ -43,10 +45,12 @@ def get_full_story(title):
     new_part = get_new_part(title)
     return attach(old_part, new_part)
 
-def add_new_part(title, new_part):
+def add_new_part(title, new_part, username):
     full_story = get_full_story(title)
     stories.set_value(title, "old_part", full_story)
     stories.set_value(title, "new_part", new_part)
+    editors = Table(data, title, "username")
+    editors.add_values([username])
 
 def clear_all():
     users.clear()
