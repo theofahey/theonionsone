@@ -44,8 +44,8 @@ def get_full_story(title):
     return attach(old_part, new_part)
 
 def add_new_part(title, new_part):
-    new_story = get_full_story(title)
-    stories.set_value(title, "old_part", new_story)
+    full_story = get_full_story(title)
+    stories.set_value(title, "old_part", full_story)
     stories.set_value(title, "new_part", new_part)
 
 def clear_all():
