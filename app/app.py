@@ -16,10 +16,18 @@ app.secret_key = urandom(24)
 
 
 def unauthorizedFlow():
+    '''
+    returns static html for when user accesses site they should not
+    '''
+
+    #simply redirects to desired site
     return redirect("/static/unauthorized.html", code=302)
 
 
 def userSignedIn(session):
+    '''
+    returns the status of user login
+    '''
     return 'username' in session.keys() and session['username']
 
 @app.route("/", methods=['GET', 'POST'])
@@ -27,6 +35,7 @@ def welcome():
     '''
     Welcome Page
     '''
+
     if userSignedIn(session):
         return render_template("home_Page.html", user = session['username'])
     else:
@@ -50,18 +59,20 @@ def disp_registerpage():
 @app.route("/check_register", methods=['GET', 'POST'])
 def check_register():
     '''
-
+    function for post-form request; register process given POST form arguments
     '''
     if userSignedIn(session):
         return redirect("/unauthorized.html", code = 302)
 
+    #store form information
     username = request.form.get('username')
     password = request.form.get('password')
     con_password = request.form.get('confirm_password')
 
-    #grabs stuff
+    #checks password requirements against password confirmation and password existence; False means it fails requirements
     password_requirements = password == con_password and bool(password)
 
+    #checks db for existing user and user existence; False means it passes requirements
     username_conflict = user_exists(username) or (not bool(username))
 
     if password_requirements and (not username_conflict):
@@ -82,6 +93,9 @@ def check_register():
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
+    '''
+    logs out the user by setting 'username' key to None
+    '''
     session['username'] = None
     return render_template('login_Page.html', extra_Message="Successfully Logged Out")
 

@@ -12,4 +12,6 @@ tomasA - 2021-11-2 11:22AM -- Created the data folder with data_functions.py whi
 
 lucasTW - 2021-11-3 6:35PM -- Updated register as well as adding pages for displaying story lists
 
-ishraqM - 2021-11-3 9:00 PM -- Added requirement.txt; 
+ishraqM - 2021-11-3 9:00 PM -- Added requirement.txt
+
+ishraqM - 2021-11-3 11:20 PM -- Authorization and registration works now and app is linked to module now
