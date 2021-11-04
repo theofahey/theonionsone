@@ -15,6 +15,7 @@ app.secret_key = urandom(24)
 #Pretty useless, just redirects to a different method
 
 
+#helper method
 def unauthorizedFlow():
     '''
     returns static html for when user accesses site they should not
@@ -23,12 +24,13 @@ def unauthorizedFlow():
     #simply redirects to desired site
     return redirect("/static/unauthorized.html", code=302)
 
-
+#helper method
 def userSignedIn(session):
     '''
     returns the status of user login
     '''
     return 'username' in session.keys() and session['username']
+
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
@@ -38,6 +40,7 @@ def welcome():
 
     if userSignedIn(session):
         return render_template("home_Page.html", user = session['username'])
+
     else:
         return render_template('login_Page.html')
 
