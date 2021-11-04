@@ -49,7 +49,7 @@ def disp_registerpage():
     '''
     if userSignedIn(session):
         return unauthorizedFlow()
-    
+
     return render_template('register.html')
 
 
@@ -84,7 +84,7 @@ def check_register():
         extra_Message = "An error has been made trying to register you."
         if not password_requirements:
             extra_Message = "Password requirements not met. Check to see that password is at least one character and that password confirmation matches"
-        
+
         elif username_conflict:
             extra_Message = "Username may already be in use, or does not contain at least one character"
 
@@ -109,9 +109,9 @@ def authenticate():
     #retrieve from FORM instead of ARGS because we are retrieving from POST method
     username = request.form.get('username')
     password = request.form.get('password')
-    
+
     #authflow variable
-    loginAuthorized = correct_password(username,password)
+    loginAuthorized = user_exists(username) and correct_password(username,password)
 
     if loginAuthorized:
         session['username'] = username
@@ -154,4 +154,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
