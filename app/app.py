@@ -49,19 +49,21 @@ def check_register():
     #grabs stuff
     password_requirements = password == con_password and bool(password)
 
-    username_conflict = False or (not bool(username))
+    username_conflict = user_exists(username) or (not bool(username))
 
     if password_requirements and (not username_conflict):
+        add_user(username,password)
         return render_template('login_Page.html', extra_Message="Successfully Registered")
 
     else:
-        #Need to create different error messages for different things
+        #Error messages based on incorrect input types
         extra_Message = "An error has been made trying to register you."
         if not password_requirements:
             extra_Message = "Password requirements not met. Check to see that password is at least one character and that password confirmation matches"
         
         elif username_conflict:
             extra_Message = "Username may already be in use, or does not contain at least one character"
+
         return render_template('register.html', extra_Message=extra_Message)
 
 

@@ -1,7 +1,7 @@
 from sqlite3 import connect
 from data.table import Table
 
-data = connect("data.db", isolation_level = None)
+data = connect("data.db", isolation_level = None, check_same_thread=False)
 users = Table(data, "users", "username")
 stories = Table(data, "stories", "title")
 
