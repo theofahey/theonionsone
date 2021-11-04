@@ -9,3 +9,5 @@ lucasTW - 2021-11-1 8:38AM -- Added testfolder0
 lucasTW - 2021-11-2 At some point -- Did stuff involving login pages
 
 lucasTW - 2021-11-3 6:35PM -- Updated register as well as adding pages for displaying story lists
+
+ishraqM - 2021-11-3 9:00 PM -- Added requirement.txt; 
