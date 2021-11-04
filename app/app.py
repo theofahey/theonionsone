@@ -14,12 +14,20 @@ app.secret_key = urandom(24)
 
 #Pretty useless, just redirects to a different method
 
+
+def unauthorizedFlow():
+    return redirect("/static/unauthorized.html", code=302)
+
+
+def userSignedIn(session):
+    return 'username' in session.keys() and session['username']
+
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
     '''
     Welcome Page
     '''
-    if 'username' in session.keys() and session['username']:
+    if userSignedIn(session):
         return render_template("home_Page.html", user = session['username'])
     else:
         return render_template('login_Page.html')
@@ -30,8 +38,8 @@ def disp_registerpage():
     '''
     register page
     '''
-    if 'username' in session.keys() and session['username']:
-        return redirect("/static/unauthorized.html", code=302)
+    if userSignedIn(session):
+        return unauthorizedFlow()
     
     return render_template('register.html')
 
@@ -44,7 +52,7 @@ def check_register():
     '''
 
     '''
-    if 'username' in session.keys() and session['username']:
+    if userSignedIn(session):
         return redirect("/unauthorized.html", code = 302)
 
     username = request.form.get('username')
@@ -74,6 +82,7 @@ def check_register():
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
+    session['username'] = None
     return render_template('login_Page.html', extra_Message="Successfully Logged Out")
 
 
@@ -99,18 +108,26 @@ def authenticate():
 
 @app.route("/home", methods=['GET', 'POST'])
 def display_home_Page():
-    return render_template('home_Page.html')
+    if(userSignedIn(session)):
+        return render_template('home_Page.html')
+    else:
+        return unauthorizedFlow()
 
 
 @app.route("/your_Stories", methods=['GET', 'POST'])
 def your_Story():
-    return render_template('your_Stories.html')
+    if(userSignedIn(session)):
+        return render_template('your_Stories.html')
+    else:
+        return unauthorizedFlow()
 
 
 @app.route("/new_Stories", methods=['GET', 'POST'])
 def new_Story():
-    return render_template('new_Stories.html')
-
+    if(userSignedIn(session)):
+        return render_template('new_Stories.html')
+    else:
+        return unauthorizedFlow()
 
 def main():
     """
@@ -123,3 +140,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
