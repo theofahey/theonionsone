@@ -14,7 +14,6 @@ app.secret_key = urandom(24)
 
 #Pretty useless, just redirects to a different method
 
-
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
     '''
@@ -31,6 +30,9 @@ def disp_registerpage():
     '''
     register page
     '''
+    if 'username' in session.keys() and session['username']:
+        return redirect("/static/unauthorized.html", code=302)
+    
     return render_template('register.html')
 
 
@@ -42,6 +44,9 @@ def check_register():
     '''
 
     '''
+    if 'username' in session.keys() and session['username']:
+        return redirect("/unauthorized.html", code = 302)
+
     username = request.form.get('username')
     password = request.form.get('password')
     con_password = request.form.get('confirm_password')
