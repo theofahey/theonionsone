@@ -146,6 +146,15 @@ def new_Story():
     else:
         return unauthorizedFlow()
 
+@app.route("/createstory" , methods = ['GET', 'POST'])
+def create_story():
+    if(not userSignedIn(session)):
+        return unauthorizedFlow()
+    
+    return render_template('create_story.html', user = session['username'])
+
+
+@app.route("/createReq", methods = "POST")
 def main():
     """
     false if this file imported as module
