@@ -83,7 +83,7 @@ def authenticate():
     password = request.form.get('password')
     
     #authflow variable
-    loginAuthorized = False
+    loginAuthorized = correct_password(username,password)
 
     if loginAuthorized:
         session['username'] = username
