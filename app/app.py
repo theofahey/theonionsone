@@ -1,11 +1,13 @@
 from flask import session
-from flask import request
-from flask import render_template  # facilitate jinja templating
-from flask import Flask  # facilitate flask webserving
-
+from flask import request, render_template, Flask, redirect
+from data.data_functions import *
+from os import urandom
 app = Flask(__name__)
 debug = True
-
+#why do we need secret keys? For this project it is not really necessary but...
+#https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key
+#I believe in a real life environment we should store the key somewhere safe in case of server crash
+app.secret_key = urandom(24)
 #   Things to work on:
 #   Implimentationationation
 #   Adding error messages and try and fails
@@ -15,10 +17,12 @@ debug = True
 
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
-    return display_login()
+    if 'username' in session.keys() and session['username']:
+        return render_template("home_Page.html", user = session['username'])
+    else:
+        return render_template('login_Page.html')
 
 #Login page
-
 
 @app.route("/welcome", methods=['GET', 'POST'])
 def display_login():
@@ -54,9 +58,18 @@ def logout():
     return render_template('login_Page.html', extra_Message="Successfully Logged Out")
 
 
-@app.route("/auth_ed", methods=['GET', 'POST'])
+@app.route("/auth_ed", methods=['POST'])
 def authenticate():
-    return display_home_Page()
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    loginAuthorized = False
+
+    if loginAuthorized:
+        session['username'] = username
+        return redirect("/", code = 302)
+    else:
+        return render_template('login_Page.html', extra_Message="Login failed, please try again")
 
 
 @app.route("/home", methods=['GET', 'POST'])

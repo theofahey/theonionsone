@@ -1,5 +1,5 @@
 from sqlite3 import connect
-from table import Table
+from data.table import Table
 
 data = connect("data.db", isolation_level = None)
 users = Table(data, "users", "username")
