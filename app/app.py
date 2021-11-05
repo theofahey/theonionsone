@@ -151,10 +151,21 @@ def create_story():
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     
-    return render_template('create_story.html', user = session['username'])
+    return render_template('create_New.html', user = session['username'])
 
 
-@app.route("/createReq", methods = "POST")
+@app.route("/requestcreate", methods = ["GET","POST"])
+def requestCreate():
+    if(not userSignedIn(session)):
+        return unauthorizedFlow()
+    
+    print("This is the story title:" + request.form.get('title'))
+    print("This is the stoiry:" + request.form.get('story'))
+
+
+
+    return redirect("/your_Stories")
+
 def main():
     """
     false if this file imported as module

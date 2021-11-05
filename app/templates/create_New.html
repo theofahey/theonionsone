@@ -1,21 +1,16 @@
 <html>
     <head>
-        <title> Create a New Story </title>
+      Create a Story!
     </head>
+    
+    <h1>Welcome {{user}}!</h1>
+    
+    <p>Create a story by filling out the text boxes below.</p>
 
-    <body>
-      <form action="/home" method = "GET">
-        <input type="submit" value="Home">
-      </form>
-    </body>
-
-    <body>
-      <p> Welcome to story creator, </p>
-      <p> please enter your story below. </p>
-      <form action="/home" method = "POST">
+      <form action="/requestcreate" method = "POST">
         <input type="text" name="title" size="15">
         <textarea id="Story" name="story" rows="10" cols="50"> </textarea>
-        <input type="submit" value="Submit Story">
+        <input type="submit" name="submit" value="Submit Story">
       </form>
     </body>
 </html>
