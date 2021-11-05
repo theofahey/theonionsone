@@ -8,8 +8,8 @@
 
 ## Haikus:
 
-<p> Goggles are worn here
-    Eyes fill with sweet salty tears
+<p> Goggles are worn here <br>
+    Eyes fill with sweet salty tears <br>
     The Big Onion Wins.
 </p>
 
@@ -18,7 +18,7 @@
 <p> Clone repo: <br>
     In the directory you want to have the code in, type into a terminal:
     ```
-    $git clone git@github.com:turtlelazy/theonionsone.git
+    $ git clone git@github.com:turtlelazy/theonionsone.git
     ```
     <br>
     Create a virtual environment (unless you already have one): <br>
