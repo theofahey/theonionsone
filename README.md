@@ -32,7 +32,7 @@ Create a virtual environment (unless you already have one):
     The virtual environment can then be activated by being in the right directory, then typing the following line in a terminal
     <br>
     ```
-    $ source (name of virtual environment directory)/BIN/activate
+    $ source (name of virtual environment directory)/bin/activate
     ```
     
 Opening theonionsone:
