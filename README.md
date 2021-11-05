@@ -17,7 +17,7 @@
 
 <p> Clone repo: <br>
     In the directory you want to have the code in, type into a terminal: <br> 
-        git clone git@github.com:turtlelazy/theonionsone.git <br>
+    `<addr>` git clone git@github.com:turtlelazy/theonionsone.git <br>
     <br>
     Create a virtual environment (unless you already have one): <br>
     A virtual environment can be created using the following line in a terminal: <br> 
