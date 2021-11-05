@@ -1,17 +1,32 @@
-ishraqM -- 2021-10-28 8:00PM -- Initializing repo with README.md, devlog.txt, and design.pdf (with revisions made based on feedback)
+ishraqM -- 2021-10-28 20:00
+Initializing repo with README.md, devlog.txt, and design.pdf (with revisions made based on feedback)
 
-lucasTW -- 2021-10-28 9:26PM -- Added team flag via upload to the repo
+lucasTW -- 2021-10-28 21:26 
+Added team flag via upload to the repo
 
-lucasTW - 2021-10-30 9:11PM -- Added designwiki0.pdf
+lucasTW - 2021-10-30 21:11PM 
+Added designwiki0.pdf
 
-lucasTW - 2021-11-1 8:38AM -- Added testfolder0
+lucasTW - 2021-11-1 20:38AM 
+Added testfolder0
 
-lucasTW - 2021-11-2 At some point -- Did stuff involving login pages
+lucasTW - 2021-11-2 00:00 
+Did stuff involving login pages
 
-tomasA - 2021-11-2 11:22AM -- Created the data folder with data_functions.py which has functions for interacting with the database
+tomasA - 2021-11-2 11:22 
+Created the data folder with data_functions.py which has functions for interacting with the database
 
-lucasTW - 2021-11-3 6:35PM -- Updated register as well as adding pages for displaying story lists
+lucasTW - 2021-11-3 18:35 
+Updated register as well as adding pages for displaying story lists
 
-ishraqM - 2021-11-3 9:00 PM -- Added requirement.txt
+ishraqM - 2021-11-3 21:00
+Added requirement.txt
 
-ishraqM - 2021-11-3 11:20 PM -- Authorization and registration works now and app is linked to module now
+ishraqM - 2021-11-3 23:20
+Authorization and registration works now and app is linked to module now
+
+tomasA - 2021-11-4 21:00
+Worked on creating functions to retrive information about stories and post information about stories. Made function to find stories edied by user.
+
+ishraqM - 2021-11-5 8:41
+Worked with team to clean up repo and worked on posting stories. Setup URL and POST flow for creating -> need to link to DB
