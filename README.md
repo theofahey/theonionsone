@@ -16,11 +16,11 @@
 ## Launch Codes:
 
 <p> Clone repo: <br>
-    In the directory you want to have the code in, type into a terminal: git clone git@github.com:turtlelazy/theonionsone.git <br>
+    In the directory you want to have the code in, type into a terminal: ```$git clone git@github.com:turtlelazy/theonionsone.git <br>```
     <br>
     Create a virtual environment (unless you already have one): <br>
-    A virtual environment can be created using the following line in a terminal: python3 venv -m (insert directory name of the virtual environment here) <br>
-    The virtual environment can then be activated by being in the right directory, then typing the following line in a terminal: source (name of virtual environment directory)/BIN/activate <br>
+    A virtual environment can be created using the following line in a terminal: $python3 venv -m (insert directory name of the virtual environment here) <br>
+    The virtual environment can then be activated by being in the right directory, then typing the following line in a terminal: $source (name of virtual environment directory)/BIN/activate <br>
     <br>
     Opening theonionsone: <br>
     cd till you get to the onionsone directory <br>
