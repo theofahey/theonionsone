@@ -17,6 +17,12 @@ def correct_password(username, password):
 
 def add_user(username, password):
     users.add_values([username, password])
+    edited_stories = Table(data, username, "title")
+    edited_stories.create(["title"])
+
+def get_edited_stories(username):
+    edited_stories = Table(data, username, "title")
+    return edited_stories.get_main_values()
 
 def get_titles():
     return stories.get_main_values()
@@ -43,10 +49,12 @@ def get_full_story(title):
     new_part = get_new_part(title)
     return attach(old_part, new_part)
 
-def add_new_part(title, new_part):
+def add_new_part(title, new_part, username):
     full_story = get_full_story(title)
     stories.set_value(title, "old_part", full_story)
     stories.set_value(title, "new_part", new_part)
+    edited_stories = Table(data, username, "title")
+    edited_stories.add_values([title])
 
 def clear_all():
     users.clear()
