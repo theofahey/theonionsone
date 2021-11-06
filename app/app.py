@@ -159,8 +159,21 @@ def requestCreate():
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     
-    print("This is the story title:" + request.form.get('title'))
-    print("This is the stoiry:" + request.form.get('story'))
+    title = request.form.get('title')
+    contents = request.form.get('story')
+    
+    matchedRequirements = True
+    if matchedRequirements:
+        print("Requirements Met. Creating story")
+        add_story(title)
+        add_new_part(title,contents,session)
+
+        print("Was the story added to db? " + story_exists(title))
+        print("Contents of the story: " + get_full_story(title))
+
+    else:
+        return render_template("create_New.html", user = session['username'], error = True)
+
 
 
 

@@ -4,7 +4,12 @@
     </head>
     
     <h1>Welcome {{user}}!</h1>
-    
+
+      {%if error%}
+      <p>
+		Hmmm. Looks like there was an issue trying to submit your story.
+      </p>
+      {% endif %}
     <p>Create a story by filling out the text boxes below.</p>
 
       <form action="/requestcreate" method = "POST">
