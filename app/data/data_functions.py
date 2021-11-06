@@ -56,10 +56,7 @@ def add_new_part(title, new_part, username):
     edited_stories = Table(data, username, "title")
     edited_stories.add_values([title])
 
-def clear_all():
-    users.clear()
-    stories.clear()
-
-def initialize():
+def reset_data():
+    open("data.db", "w").close()
     users.create(["username", "password"])
     stories.create(["title", "old_part", "new_part"])
