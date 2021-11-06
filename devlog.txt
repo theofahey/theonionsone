@@ -26,7 +26,10 @@ ishraqM - 2021-11-3 23:20
 Authorization and registration works now and app is linked to module now
 
 tomasA - 2021-11-4 21:49
-Made it so that each user has a table of their edited stories and made a function that gets a list of these stories for a given user.
+Made it so that each user has a table of their edited stories and made a function that gets a list of these stories for a given user
 
 ishraqM - 2021-11-5 8:41
 Worked with team to clean up repo and worked on posting stories. Setup URL and POST flow for creating -> need to link to DB
+
+tomasA - 2021-11-6 16:05
+Made a function to reset the database and made some changes to make the output of db_test.py more readable
