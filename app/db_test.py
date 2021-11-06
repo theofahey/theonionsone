@@ -33,6 +33,14 @@ def show_edited_stories(username):
     edited_stories = list(get_edited_stories(username))
     print(f"{username} has edited: {edited_stories}")
 
+def show_users():
+    usernames = list(get_usernames())
+    print(f"all users: {usernames}")
+
+def show_stories():
+    titles = list(get_titles())
+    print(f"all stories: {titles}")
+
 reset_data()
 
 add_user("bob", "goodpassword")
@@ -57,8 +65,8 @@ show_full_story("lord of the rings")
 story_test("harry potter")
 story_test("lord of the rings")
 story_test("cheese")
-print(list(get_usernames()))
-print(list(get_titles()))
+show_users()
+show_stories()
 show_edited_stories("bob")
 show_edited_stories("joe")
 show_edited_stories("carlos")
