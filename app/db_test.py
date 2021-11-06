@@ -1,7 +1,4 @@
-from os import remove
-remove("data.db")
 from data.data_functions import *
-initialize()
 
 def username_test(username):
     if user_exists(username):
@@ -27,6 +24,8 @@ def password_test(username, password):
 def show_edited_stories(username):
     edited_stories = list(get_edited_stories(username))
     print(f"{username} has edited: {edited_stories}")
+
+reset_data()
 
 add_user("bob", "goodpassword")
 add_user("joe", "okaypassword")

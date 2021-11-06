@@ -60,6 +60,7 @@ def clear_all():
     users.clear()
     stories.clear()
 
-def initialize():
+def reset_data():
+    open("data.db", "w").close()
     users.create(["username", "password"])
     stories.create(["title", "old_part", "new_part"])
