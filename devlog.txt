@@ -36,3 +36,7 @@ Made a function to reset the database and made some changes to make the output o
 
 ishraqM - 2021-11-7 14:00
 Made story creation work, and worked on functionality reguarding the viewing of stories.
+
+lucasTW - 2021-11-7 17:10
+Added functionality for editting already existing stories as well as changing what you see depending on whether you have editted the story or not.
+Things to work on (in a similar vien): Changing the preview of the story to only include the last edit, having a page to see stories you have not editted yet. (Currently you need to input a specific url of the story)
