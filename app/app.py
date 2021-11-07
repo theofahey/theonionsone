@@ -125,6 +125,10 @@ def authenticate():
 
 @app.route("/home", methods=['GET', 'POST'])
 def display_home_Page():
+    '''
+    displays home page
+    '''
+
     if(userSignedIn(session)):
         return render_template('home_Page.html')
     else:
@@ -133,6 +137,10 @@ def display_home_Page():
 
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
+    '''
+    provides the user with the list of stories they contributed to
+    '''
+
     user_stories = get_edited_stories(session['username']) #returns the output of map
     #this output of map is disposable, so after iterating through and using the object its contents get removed
     
@@ -152,16 +160,28 @@ def new_Story():
 
 @app.route("/stories", methods=['GET', 'POST'])
 def stories():
+    '''
+    returns a list of all stories that exist
+    '''
+
     return "here should be a list of ALL the stories"
 
 
 @app.route("/stories/<string:title>")
 def getStory(title):
-    return "this should return the story " + title
+    '''
+    returns story <title>
+    '''
+    return render_template("story.html", story = title, contents = get_full_story(title))
+    #return get_full_story(title)
 
 
 @app.route("/createstory" , methods = ['GET', 'POST'])
 def create_story():
+    '''
+    provides UI for creating a story
+    '''
+
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     
@@ -170,6 +190,10 @@ def create_story():
 
 @app.route("/requestcreate", methods = ["GET","POST"])
 def requestCreate():
+    '''
+    creates the desired story if requirements are met
+    '''
+
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     
