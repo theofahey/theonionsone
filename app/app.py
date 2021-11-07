@@ -133,8 +133,11 @@ def display_home_Page():
 
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
+    user_stories = get_edited_stories(session['username']) #returns the output of map
+    #this output of map is disposable, so after iterating through and using the object its contents get removed
+    
     if(userSignedIn(session)):
-        return render_template('your_Stories.html', stories = ["henlo","yummyumyum","kool"])
+        return render_template('your_Stories.html', stories = list(user_stories))
     else:
         return unauthorizedFlow()
 
