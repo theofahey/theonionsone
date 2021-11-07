@@ -4,8 +4,8 @@ def list_to_string(lst):
 def add_type(field_name):
     return f"{field_name} TEXT"
 
-def quote(value):
-    return f"'{value}'"
+def get_question_mark(thing):
+    return "?"
 
 def first(lst):
     return lst[0]
@@ -18,13 +18,13 @@ class Table:
         self.c = db.cursor()
     
     def add_values(self, values):
-        quoted_values = map(quote, values)
-        value_string = list_to_string(quoted_values)
-        self.c.execute(f"INSERT INTO {self.table_name} VALUES {value_string}")
+        question_marks = map(get_question_mark, values)
+        value_string = list_to_string(question_marks)
+        self.c.execute(f"INSERT INTO {self.table_name} VALUES {value_string}", values)
         self.db.commit()
     
     def set_value(self, search, field, value):
-        self.c.execute(f"UPDATE {self.table_name} SET {field} = '{value}' WHERE {self.search_field} = '{search}'")
+        self.c.execute(f"UPDATE {self.table_name} SET {field} = ? WHERE {self.search_field} = ?", [value, search])
         self.db.commit()
     
     def get_main_values(self):
@@ -33,7 +33,7 @@ class Table:
         return map(first, value_lists)
     
     def get_value_list(self, search, field):
-        self.c.execute(f"SELECT {field} FROM {self.table_name} WHERE {self.search_field} = '{search}'")
+        self.c.execute(f"SELECT {field} FROM {self.table_name} WHERE {self.search_field} = ?", [search])
         return self.c.fetchone()
     
     def get_value(self, search, field):
