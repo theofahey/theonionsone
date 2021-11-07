@@ -12,9 +12,6 @@ app.secret_key = urandom(24)
 #   Implimentationationation
 #   Adding error messages and try and fails
 
-#Pretty useless, just redirects to a different method
-
-
 #helper method
 def unauthorizedFlow():
     '''
@@ -31,7 +28,6 @@ def userSignedIn(session):
     '''
     return 'username' in session.keys() and session['username']
 
-
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
     '''
@@ -44,7 +40,6 @@ def welcome():
     else:
         return render_template('login_Page.html')
 
-
 @app.route("/register", methods=['GET', 'POST'])
 def disp_registerpage():
     '''
@@ -54,8 +49,6 @@ def disp_registerpage():
         return unauthorizedFlow()
 
     return render_template('register.html')
-
-
 
 #Checks the register to make sure everything is good
 #Password and confirm password should be the same
@@ -93,7 +86,6 @@ def check_register():
 
         return render_template('register.html', extra_Message=extra_Message)
 
-
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     '''
@@ -101,7 +93,6 @@ def logout():
     '''
     session['username'] = None
     return render_template('login_Page.html', extra_Message="Successfully Logged Out")
-
 
 @app.route("/auth_ed", methods=['POST'])
 def authenticate():
@@ -122,7 +113,6 @@ def authenticate():
     else:
         return render_template('login_Page.html', extra_Message="Login failed, please try again")
 
-
 @app.route("/home", methods=['GET', 'POST'])
 def display_home_Page():
     '''
@@ -134,7 +124,6 @@ def display_home_Page():
     else:
         return unauthorizedFlow()
 
-
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
     '''
@@ -143,20 +132,11 @@ def your_Story():
 
     user_stories = get_edited_stories(session['username']) #returns the output of map
     #this output of map is disposable, so after iterating through and using the object its contents get removed
-    
+
     if(userSignedIn(session)):
         return render_template('your_Stories.html', stories = list(user_stories))
     else:
         return unauthorizedFlow()
-
-
-@app.route("/new_stories", methods=['GET', 'POST'])
-def new_Story():
-    if(userSignedIn(session)):
-        return render_template('new_Stories.html')
-    else:
-        return unauthorizedFlow()
-
 
 @app.route("/stories", methods=['GET', 'POST'])
 def stories():
@@ -166,17 +146,20 @@ def stories():
 
     return "here should be a list of ALL the stories"
 
-
 @app.route("/stories/<string:title>")
 def getStory(title):
     '''
     returns story <title>
     '''
-
     #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
-    return render_template("story.html", story = title, contents = get_full_story(title))
-    #return get_full_story(title)
+    user_stories = get_edited_stories(session['username'])
 
+    if (title in user_stories): #different depending on whether user has editted the story
+        return render_template("story.html", story = title, contents = get_full_story(title))
+        #return get_full_story(title)
+    else:
+        return render_template("see_story.html", story = title, latest_contents = get_full_story(title))
+        #return get_full_story(title)
 
 @app.route("/createstory" , methods = ['GET', 'POST'])
 def create_story():
@@ -186,9 +169,8 @@ def create_story():
 
     if(not userSignedIn(session)):
         return unauthorizedFlow()
-    
-    return render_template('create_New.html', user = session['username'])
 
+    return render_template('create_New.html', user = session['username'])
 
 @app.route("/requestcreate", methods = ["GET","POST"])
 def requestCreate():
@@ -198,10 +180,10 @@ def requestCreate():
 
     if(not userSignedIn(session)):
         return unauthorizedFlow()
-    
+
     title = request.form.get('title')
     contents = request.form.get('story')
-    
+
     matchedRequirements = not story_exists(title)
 
     if matchedRequirements:
@@ -229,6 +211,18 @@ def requestCreate():
 
     return redirect("/your_stories")
 
+@app.route("/edit_Story/<string:title>", methods = ["GET","POST"])
+def edit_Story(title):
+    return render_template("edit_Story.html", story = title, latest_contents = get_full_story(title))
+
+@app.route("/requestaddition/<string:title>", methods = ["GET", "POST"])
+def requestAddition(title):
+    if(not userSignedIn(session)):
+        return unauthorizedFlow()
+    new_contents = request.form.get('story')
+    add_new_part(title, new_contents, session['username'])
+    return redirect("/your_stories")
+
 def main():
     """
     false if this file imported as module
@@ -236,7 +230,6 @@ def main():
     """
     app.debug = True
     app.run()
-
 
 if __name__ == "__main__":
     main()

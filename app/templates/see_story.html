@@ -6,10 +6,15 @@
         <input type="submit" value="Home">
       </form>
     </body>
-    
+
     <body>
         <h1>{{story}}</h1>
-        <p>{{contents}}</p>
+        <p>{{latest_contents}}</p>
     </body>
 
+    <body>
+      <form action="/edit_Story/{{story}}" method = "GET">
+        <input type="submit" value="Add to the story">
+      </form>
+    </body>
 </html>
