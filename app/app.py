@@ -134,17 +134,28 @@ def display_home_Page():
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
     if(userSignedIn(session)):
-        return render_template('your_Stories.html')
+        return render_template('your_Stories.html', stories = ["henlo","yummyumyum","kool"])
     else:
         return unauthorizedFlow()
 
 
-@app.route("/new_Stories", methods=['GET', 'POST'])
+@app.route("/new_stories", methods=['GET', 'POST'])
 def new_Story():
     if(userSignedIn(session)):
         return render_template('new_Stories.html')
     else:
         return unauthorizedFlow()
+
+
+@app.route("/stories", methods=['GET', 'POST'])
+def stories():
+    return "here should be a list of ALL the stories"
+
+
+@app.route("/stories/<string:title>")
+def getStory(title):
+    return "this should return the story " + title
+
 
 @app.route("/createstory" , methods = ['GET', 'POST'])
 def create_story():
@@ -163,7 +174,7 @@ def requestCreate():
     contents = request.form.get('story')
     
     matchedRequirements = not story_exists(title)
-    
+
     if matchedRequirements:
         if debug:
             print (user_exists(session['username']))
