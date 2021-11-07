@@ -131,7 +131,7 @@ def display_home_Page():
         return unauthorizedFlow()
 
 
-@app.route("/your_Stories", methods=['GET', 'POST'])
+@app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
     if(userSignedIn(session)):
         return render_template('your_Stories.html')
@@ -162,22 +162,32 @@ def requestCreate():
     title = request.form.get('title')
     contents = request.form.get('story')
     
-    matchedRequirements = True
+    matchedRequirements = not story_exists(title)
+    
     if matchedRequirements:
-        print("Requirements Met. Creating story")
-        add_story(title)
-        add_new_part(title,contents,session['username'])
+        if debug:
+            print (user_exists(session['username']))
+            print("Requirements Met. Creating story")
 
-        print("Was the story added to db? " + str(story_exists(title)))
-        print("Contents of the story: " + get_full_story(title))
+            add_story(title)
+            print("Story created")
 
+            add_new_part(title,contents,session['username'])
+            print("Contents added")
+
+            print("Was the story added to db? " + str(story_exists(title)))
+            print("Contents of the story: " + get_full_story(title))
+        else:
+
+            add_story(title)
+            add_new_part(title, contents, session['username'])
     else:
         return render_template("create_New.html", user = session['username'], error = True)
 
 
 
 
-    return redirect("/your_Stories")
+    return redirect("/your_stories")
 
 def main():
     """
