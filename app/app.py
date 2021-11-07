@@ -166,9 +166,9 @@ def requestCreate():
     if matchedRequirements:
         print("Requirements Met. Creating story")
         add_story(title)
-        add_new_part(title,contents,session)
+        add_new_part(title,contents,session['username'])
 
-        print("Was the story added to db? " + story_exists(title))
+        print("Was the story added to db? " + str(story_exists(title)))
         print("Contents of the story: " + get_full_story(title))
 
     else:
