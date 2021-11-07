@@ -172,6 +172,8 @@ def getStory(title):
     '''
     returns story <title>
     '''
+
+    #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
     return render_template("story.html", story = title, contents = get_full_story(title))
     #return get_full_story(title)
 

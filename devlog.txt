@@ -33,3 +33,6 @@ Worked with team to clean up repo and worked on posting stories. Setup URL and P
 
 tomasA - 2021-11-6 16:05
 Made a function to reset the database and made some changes to make the output of db_test.py more readable
+
+ishraqM - 2021-11-7 14:00
+Made story creation work, and worked on functionality reguarding the viewing of stories.
