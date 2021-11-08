@@ -220,7 +220,7 @@ def requestCreate():
 
 @app.route("/edit_Story/<string:title>", methods = ["GET","POST"])
 def edit_Story(title):
-    return render_template("edit_Story.html", story = title, latest_contents = get_full_story(title))
+    return render_template("edit_Story.html", story = title, latest_contents = get_new_part(title))
 
 @app.route("/requestaddition/<string:title>", methods = ["GET", "POST"])
 def requestAddition(title):
