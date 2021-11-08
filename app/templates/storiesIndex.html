@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title> Your Stories </title>
+    </head>
+
+    <!-- Home -->
+    <body>
+      Here are your list of stories!
+
+      <ul>
+        {% for story in stories %}
+          <li> <a href = "/stories/{{story}}"> {{story}} </a> </li>
+        {% endfor %}
+      </ul>
+
+      <form action="/home" method = "GET">
+        <input type="submit" value="Home">
+      </form>
+    </body>
+
+    <body>
+
+    </body>
+</html>

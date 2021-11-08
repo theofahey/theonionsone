@@ -144,7 +144,13 @@ def stories():
     returns a list of all stories that exist
     '''
 
-    return "here should be a list of ALL the stories"
+    all_stories = get_titles() # returns the output of map
+    #this output of map is disposable, so after iterating through and using the object its contents get removed
+
+    if(userSignedIn(session)):
+        return render_template('your_Stories.html', stories=list(all_stories))
+    else:
+        return unauthorizedFlow()
 
 @app.route("/stories/<string:title>")
 def getStory(title):
