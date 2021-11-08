@@ -42,7 +42,7 @@ def get_new_part(title):
 def attach(old_part, new_part):
     if old_part == "":
         return new_part
-    return old_part + "<br><br>" + new_part
+    return old_part + "\n" + new_part
 
 def get_full_story(title):
     old_part = get_old_part(title)
