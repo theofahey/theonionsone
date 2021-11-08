@@ -164,7 +164,8 @@ def getStory(title):
         return render_template("story.html", story = title, contents = get_full_story(title))
         #return get_full_story(title)
     else:
-        return render_template("see_story.html", story = title, latest_contents = get_full_story(title))
+
+        return render_template("see_story.html", story = title, latest_contents = get_new_part(title))
         #return get_full_story(title)
 
 @app.route("/createstory" , methods = ['GET', 'POST'])
