@@ -3,6 +3,9 @@
         <title> Your Stories </title>
     </head>
 
+    <form action="/" method = "GET">
+        <input type="submit" value="Home">
+    </form>
     <!-- Home -->
     <body>
       Here are your list of stories!
@@ -12,10 +15,6 @@
           <li> <a href = "/stories/{{story}}"> {{story}} </a> </li>
         {% endfor %}
       </ul>
-
-      <form action="/home" method = "GET">
-        <input type="submit" value="Home">
-      </form>
     </body>
 
     <body>
