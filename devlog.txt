@@ -40,3 +40,9 @@ Made story creation work, and worked on functionality reguarding the viewing of 
 lucasTW - 2021-11-7 17:10
 Added functionality for editting already existing stories as well as changing what you see depending on whether you have editted the story or not.
 Things to work on (in a similar vien): Changing the preview of the story to only include the last edit, having a page to see stories you have not editted yet. (Currently you need to input a specific url of the story)
+
+ishraqM - 2021-11-8 9:00
+The group got together and made list of final things we would need to add. We worked on fixing up the permissions and touching up on the visuals.
+
+ishraqM - 2021-11-9 00:00
+Created branch and ensured home buttons were on every page.
