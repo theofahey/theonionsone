@@ -113,17 +113,6 @@ def authenticate():
     else:
         return render_template('login_Page.html', extra_Message="Login failed, please try again")
 
-@app.route("/home", methods=['GET', 'POST'])
-def display_home_Page():
-    '''
-    displays home page
-    '''
-
-    if(userSignedIn(session)):
-        return render_template('home_Page.html')
-    else:
-        return unauthorizedFlow()
-
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
     '''
@@ -213,9 +202,6 @@ def requestCreate():
     else:
         return render_template("create_New.html", user = session['username'], error = True)
 
-
-
-
     return redirect("/your_stories")
 
 @app.route("/edit_Story/<string:title>", methods = ["GET","POST"])
@@ -227,6 +213,11 @@ def requestAddition(title):
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     new_contents = request.form.get('story')
+    # new_content = """
+    # a
+    # b
+    # """
+    # new_content = new_content + new_contents
     add_new_part(title, new_contents, session['username'])
     return redirect("/your_stories")
 
