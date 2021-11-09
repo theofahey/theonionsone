@@ -148,8 +148,10 @@ def getStory(title):
     '''
     #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
     user_stories = get_edited_stories(session['username'])
-
+    
+    #https://stackoverflow.com/questions/12244057/any-way-to-add-a-new-line-from-a-string-with-the-n-character-in-flask
     if (title in user_stories): #different depending on whether user has editted the story
+        gob = get_full_story(title).split('\n')
         return render_template("story.html", story = title, contents = get_full_story(title))
         #return get_full_story(title)
     else:
@@ -213,11 +215,7 @@ def requestAddition(title):
     if(not userSignedIn(session)):
         return unauthorizedFlow()
     new_contents = request.form.get('story')
-    # new_content = """
-    # a
-    # b
-    # """
-    # new_content = new_content + new_contents
+    new_content = "\n" + new_contents
     add_new_part(title, new_contents, session['username'])
     return redirect("/your_stories")
 
