@@ -1,0 +1,18 @@
+<html>
+    <head>
+      <title>
+        Something went wrong!
+	    </title>
+    </head>
+
+    <p>
+      Click the home button to return <br>
+        <form action="/" method="GET">
+		        <input type="submit" value="Home">
+	     </form>
+    </p>
+
+    {% for n in range(1000) %}
+      <h{{n}}> Something went wrong! </h{{n}}>
+      {% endfor %}
+</html>
