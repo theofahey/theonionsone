@@ -45,3 +45,9 @@ The group got together and made list of final things we would need to add. We wo
 
 ishraqM - 2021-11-9 00:00
 Created branch and ensured home buttons were on every page.
+
+tomasA - 2021-11-9 9:00
+Added docstrings to data_functions.py.
+
+ishraqM - 2021-11-10 9:00
+Newlines are now kept track of and added between entries, which in turn is now displayed utilizing Jinja.
