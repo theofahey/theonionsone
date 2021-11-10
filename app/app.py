@@ -151,12 +151,11 @@ def getStory(title):
     
     #https://stackoverflow.com/questions/12244057/any-way-to-add-a-new-line-from-a-string-with-the-n-character-in-flask
     if (title in user_stories): #different depending on whether user has editted the story
-        gob = get_full_story(title).split('\n')
-        return render_template("story.html", story = title, contents = get_full_story(title))
+        return render_template("story.html", story = title, contents = get_full_story(title).split("\n"))
         #return get_full_story(title)
     else:
 
-        return render_template("see_story.html", story = title, latest_contents = get_new_part(title))
+        return render_template("see_story.html", story=title, latest_contents = get_new_part(title).split("\n"))
         #return get_full_story(title)
 
 @app.route("/createstory" , methods = ['GET', 'POST'])

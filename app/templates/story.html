@@ -1,15 +1,19 @@
 <html>
-    <title>{{story}}</title>
+<title>{{story}}</title>
 
-    <body>
-      <form action="/" method = "GET">
+<body>
+    <form action="/" method="GET">
         <input type="submit" value="Home">
-      </form>
-    </body>
+    </form>
+</body>
 
-    <body>
-        <h1>{{story}}</h1>
-        <p>{{contents}}</p>
-    </body>
+<body>
+    <h1>{{story}}</h1>
+    <p>
+        {% for para in contents %}
+        {{para}} <br>
+        {% endfor %}
+    </p>
+</body>
 
 </html>
