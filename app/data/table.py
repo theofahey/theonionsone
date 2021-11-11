@@ -49,11 +49,6 @@ class Table:
         value_list = self.get_value_list(search, "1")
         return bool(value_list)
     
-    def clear(self):
-        self.c.execute(f"DELETE FROM {self.table_name}")
-        self.c.execute("VACUUM")
-        self.db.commit()
-    
     def create(self, field_names):
         "creates a table with field_names"
         fields = map(add_type, field_names)
