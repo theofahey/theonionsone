@@ -22,7 +22,7 @@ def unauthorizedFlow():
     return redirect("/static/unauthorized.html", code=302)
 
 #helper method
-def userSignedIn(session):
+def userSignedIn():
     '''
     returns the status of user login
     '''
@@ -35,7 +35,7 @@ def welcome():
     '''
     try:
 
-        if userSignedIn(session):
+        if userSignedIn():
             return render_template("home_Page.html", user = session['username'])
 
         else:
@@ -49,7 +49,7 @@ def disp_registerpage():
     register page
     '''
     try:
-        if userSignedIn(session):
+        if userSignedIn():
             return unauthorizedFlow()
 
         return render_template('register.html')
@@ -65,7 +65,7 @@ def check_register():
     '''
 
     try:
-        if userSignedIn(session):
+        if userSignedIn():
             return unauthorizedFlow()
 
         #store form information
@@ -135,17 +135,17 @@ def your_Story():
     '''
     provides the user with the list of stories they contributed to
     '''
-    if not userSignedIn(session):
+    if not userSignedIn():
         return unauthorizedFlow()
     try:
         user_stories = get_edited_stories(session['username']) #returns the output of map
         #this output of map is disposable, so after iterating through and using the object its contents get removed
 
-        if(userSignedIn(session)):
+        if(userSignedIn()):
             return render_template('your_Stories.html', stories = list(user_stories), verb = "'ve")
         else:
             return unauthorizedFlow()
-    
+
     except:
         return render_template('ErrorResponse.html')
 
@@ -158,7 +158,7 @@ def stories():
         unedited_stories = get_unedited_stories(session['username']) # returns the output of map
         #this output of map is disposable, so after iterating through and using the object its contents get removed
 
-        if(userSignedIn(session)):
+        if(userSignedIn()):
             return render_template('your_Stories.html', stories=list(unedited_stories), verb = " haven't")
         else:
             return unauthorizedFlow()
@@ -171,13 +171,13 @@ def getStory(title):
     '''
     returns story <title>
     '''
-    if not userSignedIn(session):
+    if not userSignedIn():
         return unauthorizedFlow()
 
     try:
     #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
         user_stories = get_edited_stories(session['username'])
-        
+
         #https://stackoverflow.com/questions/12244057/any-way-to-add-a-new-line-from-a-string-with-the-n-character-in-flask
         if (title in user_stories): #different depending on whether user has editted the story
             return render_template("story.html", story = title, contents = get_full_story(title).split("\n"))
@@ -197,7 +197,7 @@ def create_story():
     '''
 
     try:
-        if(not userSignedIn(session)):
+        if(not userSignedIn()):
             return unauthorizedFlow()
 
         return render_template('create_New.html', user = session['username'])
@@ -210,7 +210,7 @@ def requestCreate():
     creates the desired story if requirements are met
     '''
     try:
-        if(not userSignedIn(session)):
+        if(not userSignedIn()):
             return unauthorizedFlow()
 
         title = request.form.get('title')
@@ -246,7 +246,7 @@ def requestCreate():
 @app.route("/edit_Story/<string:title>", methods = ["GET","POST"])
 def edit_Story(title):
     try:
-        if not userSignedIn(session):
+        if not userSignedIn():
             return unauthorizedFlow()
 
         return render_template("edit_Story.html", story = title, latest_contents = get_new_part(title))
@@ -256,7 +256,7 @@ def edit_Story(title):
 @app.route("/requestaddition/<string:title>", methods = ["GET", "POST"])
 def requestAddition(title):
     try:
-        if(not userSignedIn(session)):
+        if(not userSignedIn()):
             return unauthorizedFlow()
         new_contents = request.form.get('story')
         new_content = "\n" + new_contents
