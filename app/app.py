@@ -154,17 +154,17 @@ def stories():
     '''
     returns a list of all stories that exist
     '''
-    #try:
-    unedited_stories = get_unedited_stories(session['username']) # returns the output of map
-    #this output of map is disposable, so after iterating through and using the object its contents get removed
+    try:
+        unedited_stories = get_unedited_stories(session['username']) # returns the output of map
+        #this output of map is disposable, so after iterating through and using the object its contents get removed
 
-    if(userSignedIn(session)):
-        return render_template('your_Stories.html', stories=list(unedited_stories), verb = " haven't")
-    else:
-        return unauthorizedFlow()
+        if(userSignedIn(session)):
+            return render_template('your_Stories.html', stories=list(unedited_stories), verb = " haven't")
+        else:
+            return unauthorizedFlow()
 
-    #except:
-    #    return render_template('ErrorResponse.html')
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/stories/<string:title>")
 def getStory(title):
