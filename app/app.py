@@ -74,19 +74,19 @@ def check_register():
         con_password = request.form.get('confirm_password')
 
         #checks password requirements against password confirmation and password existence; False means it fails requirements
-        password_requirements = password == con_password and bool(password)
+        password_conflict = (not bool(password)) or password != con_password
 
         #checks db for existing user and user existence; False means it passes requirements
-        username_conflict = user_exists(username) or (not bool(username))
+        username_conflict = (not bool(username)) or user_exists(username)
 
-        if password_requirements and (not username_conflict):
+        if not (password_conflict or username_conflict):
             add_user(username,password)
             return render_template('login_Page.html', extra_Message="Successfully Registered")
 
         else:
             #Error messages based on incorrect input types
             extra_Message = "An error has been made trying to register you."
-            if not password_requirements:
+            if password_conflict:
                 extra_Message = "Password requirements not met. Check to see that password is at least one character and that password confirmation matches"
 
             elif username_conflict:
