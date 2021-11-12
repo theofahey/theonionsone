@@ -35,8 +35,8 @@ def get_titles():
 
 def get_unedited_stories(username):
     "returns a list of titles of stories not edited by user"
-    titles = get_titles()
-    edited_stories = get_edited_stories(username)
+    titles = set(get_titles())
+    edited_stories = set(get_edited_stories(username))
     return titles - edited_stories
 
 def story_exists(title):
