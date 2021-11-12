@@ -33,22 +33,28 @@ def welcome():
     '''
     Welcome Page
     '''
+    try:
 
-    if userSignedIn(session):
-        return render_template("home_Page.html", user = session['username'])
+        if userSignedIn(session):
+            return render_template("home_Page.html", user = session['username'])
 
-    else:
-        return render_template('login_Page.html')
+        else:
+            return render_template('login_Page.html')
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def disp_registerpage():
     '''
     register page
     '''
-    if userSignedIn(session):
-        return unauthorizedFlow()
+    try:
+        if userSignedIn(session):
+            return unauthorizedFlow()
 
-    return render_template('register.html')
+        return render_template('register.html')
+    except:
+        return render_template('ErrorResponse.html')
 
 #Checks the register to make sure everything is good
 #Password and confirm password should be the same
@@ -57,106 +63,132 @@ def check_register():
     '''
     function for post-form request; register process given POST form arguments
     '''
-    if userSignedIn(session):
-        return redirect("/unauthorized.html", code = 302)
 
-    #store form information
-    username = request.form.get('username')
-    password = request.form.get('password')
-    con_password = request.form.get('confirm_password')
+    try:
+        if userSignedIn(session):
+            return redirect("/unauthorized.html", code = 302)
 
-    #checks password requirements against password confirmation and password existence; False means it fails requirements
-    password_requirements = password == con_password and bool(password)
+        #store form information
+        username = request.form.get('username')
+        password = request.form.get('password')
+        con_password = request.form.get('confirm_password')
 
-    #checks db for existing user and user existence; False means it passes requirements
-    username_conflict = user_exists(username) or (not bool(username))
+        #checks password requirements against password confirmation and password existence; False means it fails requirements
+        password_requirements = password == con_password and bool(password)
 
-    if password_requirements and (not username_conflict):
-        add_user(username,password)
-        return render_template('login_Page.html', extra_Message="Successfully Registered")
+        #checks db for existing user and user existence; False means it passes requirements
+        username_conflict = user_exists(username) or (not bool(username))
 
-    else:
-        #Error messages based on incorrect input types
-        extra_Message = "An error has been made trying to register you."
-        if not password_requirements:
-            extra_Message = "Password requirements not met. Check to see that password is at least one character and that password confirmation matches"
+        if password_requirements and (not username_conflict):
+            add_user(username,password)
+            return render_template('login_Page.html', extra_Message="Successfully Registered")
 
-        elif username_conflict:
-            extra_Message = "Username may already be in use, or does not contain at least one character"
+        else:
+            #Error messages based on incorrect input types
+            extra_Message = "An error has been made trying to register you."
+            if not password_requirements:
+                extra_Message = "Password requirements not met. Check to see that password is at least one character and that password confirmation matches"
 
-        return render_template('register.html', extra_Message=extra_Message)
+            elif username_conflict:
+                extra_Message = "Username may already be in use, or does not contain at least one character"
+
+            return render_template('register.html', extra_Message=extra_Message)
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     '''
     logs out the user by setting 'username' key to None
     '''
-    session['username'] = None
-    return render_template('login_Page.html', extra_Message="Successfully Logged Out")
+
+    try:
+        session['username'] = None
+        return render_template('login_Page.html', extra_Message="Successfully Logged Out")
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/auth_ed", methods=['POST'])
 def authenticate():
     '''
     authorization page; redirects and logs in if credentials work, loads login template if not
     '''
+    try:
+        #retrieve from FORM instead of ARGS because we are retrieving from POST method
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-    #retrieve from FORM instead of ARGS because we are retrieving from POST method
-    username = request.form.get('username')
-    password = request.form.get('password')
+        #authflow variable
+        loginAuthorized = user_exists(username) and correct_password(username,password)
 
-    #authflow variable
-    loginAuthorized = user_exists(username) and correct_password(username,password)
+        if loginAuthorized:
+            session['username'] = username
+            return redirect("/", code = 302)
+        else:
+            return render_template('login_Page.html', extra_Message="Login failed, please try again")
 
-    if loginAuthorized:
-        session['username'] = username
-        return redirect("/", code = 302)
-    else:
-        return render_template('login_Page.html', extra_Message="Login failed, please try again")
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/your_stories", methods=['GET', 'POST'])
 def your_Story():
     '''
     provides the user with the list of stories they contributed to
     '''
-
-    user_stories = get_edited_stories(session['username']) #returns the output of map
-    #this output of map is disposable, so after iterating through and using the object its contents get removed
-
-    if(userSignedIn(session)):
-        return render_template('your_Stories.html', stories = list(user_stories))
-    else:
+    if not userSignedIn(session):
         return unauthorizedFlow()
+    try:
+        user_stories = get_edited_stories(session['username']) #returns the output of map
+        #this output of map is disposable, so after iterating through and using the object its contents get removed
+
+        if(userSignedIn(session)):
+            return render_template('your_Stories.html', stories = list(user_stories))
+        else:
+            return unauthorizedFlow()
+    
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/stories", methods=['GET', 'POST'])
 def stories():
     '''
     returns a list of all stories that exist
     '''
+    try:
+        all_stories = get_titles() # returns the output of map
+        #this output of map is disposable, so after iterating through and using the object its contents get removed
 
-    all_stories = get_titles() # returns the output of map
-    #this output of map is disposable, so after iterating through and using the object its contents get removed
+        if(userSignedIn(session)):
+            return render_template('your_Stories.html', stories=list(all_stories))
+        else:
+            return unauthorizedFlow()
 
-    if(userSignedIn(session)):
-        return render_template('your_Stories.html', stories=list(all_stories))
-    else:
-        return unauthorizedFlow()
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/stories/<string:title>")
 def getStory(title):
     '''
     returns story <title>
     '''
-    #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
-    user_stories = get_edited_stories(session['username'])
-    
-    #https://stackoverflow.com/questions/12244057/any-way-to-add-a-new-line-from-a-string-with-the-n-character-in-flask
-    if (title in user_stories): #different depending on whether user has editted the story
-        return render_template("story.html", story = title, contents = get_full_story(title).split("\n"))
-        #return get_full_story(title)
-    else:
+    if not userSignedIn(session):
+        return unauthorizedFlow()
 
-        return render_template("see_story.html", story=title, latest_contents = get_new_part(title).split("\n"))
-        #return get_full_story(title)
+    try:
+    #utilizes the title variable found in the url and inputs it into the template, along with the content needed to be retrieved
+        user_stories = get_edited_stories(session['username'])
+        
+        #https://stackoverflow.com/questions/12244057/any-way-to-add-a-new-line-from-a-string-with-the-n-character-in-flask
+        if (title in user_stories): #different depending on whether user has editted the story
+            return render_template("story.html", story = title, contents = get_full_story(title).split("\n"))
+            #return get_full_story(title)
+        else:
+
+            return render_template("see_story.html", story=title, latest_contents = get_new_part(title).split("\n"))
+            #return get_full_story(title)
+
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/createstory" , methods = ['GET', 'POST'])
 def create_story():
@@ -164,67 +196,85 @@ def create_story():
     provides UI for creating a story
     '''
 
-    if(not userSignedIn(session)):
-        return unauthorizedFlow()
+    try:
+        if(not userSignedIn(session)):
+            return unauthorizedFlow()
 
-    return render_template('create_New.html', user = session['username'])
+        return render_template('create_New.html', user = session['username'])
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/requestcreate", methods = ["GET","POST"])
 def requestCreate():
     '''
     creates the desired story if requirements are met
     '''
+    try:
+        if(not userSignedIn(session)):
+            return unauthorizedFlow()
 
-    if(not userSignedIn(session)):
-        return unauthorizedFlow()
+        title = request.form.get('title')
+        contents = request.form.get('story')
 
-    title = request.form.get('title')
-    contents = request.form.get('story')
+        matchedRequirements = not story_exists(title)
 
-    matchedRequirements = not story_exists(title)
+        if matchedRequirements:
+            if debug:
+                print (user_exists(session['username']))
+                print("Requirements Met. Creating story")
 
-    if matchedRequirements:
-        if debug:
-            print (user_exists(session['username']))
-            print("Requirements Met. Creating story")
+                add_story(title)
+                print("Story created")
 
-            add_story(title)
-            print("Story created")
+                add_new_part(title,contents,session['username'])
+                print("Contents added")
 
-            add_new_part(title,contents,session['username'])
-            print("Contents added")
+                print("Was the story added to db? " + str(story_exists(title)))
+                print("Contents of the story: " + get_full_story(title))
+            else:
 
-            print("Was the story added to db? " + str(story_exists(title)))
-            print("Contents of the story: " + get_full_story(title))
+                add_story(title)
+                add_new_part(title, contents, session['username'])
         else:
+            return render_template("create_New.html", user = session['username'], error = True)
 
-            add_story(title)
-            add_new_part(title, contents, session['username'])
-    else:
-        return render_template("create_New.html", user = session['username'], error = True)
+        return redirect("/your_stories")
 
-    return redirect("/your_stories")
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/edit_Story/<string:title>", methods = ["GET","POST"])
 def edit_Story(title):
-    return render_template("edit_Story.html", story = title, latest_contents = get_new_part(title))
+    try:
+        if not userSignedIn(session):
+            return unauthorizedFlow()
+
+        return render_template("edit_Story.html", story = title, latest_contents = get_new_part(title))
+    except:
+        return render_template('ErrorResponse.html')
 
 @app.route("/requestaddition/<string:title>", methods = ["GET", "POST"])
 def requestAddition(title):
-    if(not userSignedIn(session)):
-        return unauthorizedFlow()
-    new_contents = request.form.get('story')
-    new_content = "\n" + new_contents
-    add_new_part(title, new_contents, session['username'])
-    return redirect("/your_stories")
+    try:
+        if(not userSignedIn(session)):
+            return unauthorizedFlow()
+        new_contents = request.form.get('story')
+        new_content = "\n" + new_contents
+        add_new_part(title, new_contents, session['username'])
+        return redirect("/your_stories")
+    except:
+        return render_template('ErrorResponse.html')
 
 def main():
     """
     false if this file imported as module
     debugging enabled
     """
-    app.debug = True
-    app.run()
+    try:
+        app.debug = True
+        app.run()
+    except:
+        return render_template('ErrorResponse.html')
 
 if __name__ == "__main__":
     main()

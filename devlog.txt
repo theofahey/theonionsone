@@ -51,3 +51,9 @@ Added docstrings to data_functions.py.
 
 ishraqM - 2021-11-10 9:00
 Newlines are now kept track of and added between entries, which in turn is now displayed utilizing Jinja.
+
+tomasA - 2021-11-11 19:00
+Added docstrings to table.py and cleaned up some code
+
+ishraqM - 2021-11-11 23:45
+Try catch blocks added and a bit of authflow clean up.
