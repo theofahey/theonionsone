@@ -24,7 +24,7 @@ def add_user(username, password):
     edited_stories = Table(data, username, "title")
     edited_stories.create(["title"])
 
-def get_titles():
+def get_stories():
     return stories.get_main_values()
 
 def get_edited_stories(username):
@@ -34,9 +34,9 @@ def get_edited_stories(username):
 
 def get_unedited_stories(username):
     "returns a list of titles of stories not edited by user"
-    titles = set(get_titles())
+    stories = set(get_stories())
     edited_stories = set(get_edited_stories(username))
-    return titles - edited_stories
+    return stories - edited_stories
 
 def story_exists(title):
     "returns true if story exists"
