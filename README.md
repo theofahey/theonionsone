@@ -12,6 +12,8 @@ Eyes fill with sweet salty tears
 The Big Onion Wins.
 
 ## Launch Codes:
+Prerequisites:
+    Python 3 is installed and necessary environment variables are setup properly.
 
 Clone repo:
     <br>
@@ -26,7 +28,7 @@ Create a virtual environment (unless you already have one):
     A virtual environment can be created using the following line in a terminal 
     <br>
     ```
-    $ python3 venv -m (insert directory name of the virtual environment here)
+    $ python3 -m venv ~/path/to/virtual/environment/directory
     ```
     <br>
     The virtual environment can then be activated by being in the right directory, then typing the following line in a terminal
@@ -34,19 +36,24 @@ Create a virtual environment (unless you already have one):
     ```
     $ source (name of virtual environment directory)/bin/activate
     ```
+    <br>
+    To then install the required packages, navigate to this repository, and enter in the following with the virtual environment activated:
+    ```
+    pip install -r requirements.txt
+    ```
     
 Opening theonionsone:
     <br>
-    cd till you get to the onionsone directory
+    cd into the theonionsone repo
     <br>
     Then cd again to app 
     
 Running code:
     <br>
-    Once you are in the right directory (with app.py inside of theonionsone), type the following line into a terminal
+    Once you are in the app directory, which contains app.py, type the following line into a terminal
     <br>
     ```
-    $ python app.py 
+    $ python3 app.py 
     ```
     <br>
     Open the link given from the the terminal.
