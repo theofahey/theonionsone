@@ -66,7 +66,7 @@ def check_register():
 
     try:
         if userSignedIn(session):
-            return redirect("/unauthorized.html", code = 302)
+            return unauthorizedFlow()
 
         #store form information
         username = request.form.get('username')
