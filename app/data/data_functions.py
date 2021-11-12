@@ -33,6 +33,12 @@ def get_titles():
     "returns a list of titles of stories"
     return stories.get_main_values()
 
+def get_unedited_stories(username):
+    "returns a list of titles of stories not edited by user"
+    titles = get_titles()
+    edited_stories = get_edited_stories(username)
+    return titles - edited_stories
+
 def story_exists(title):
     "returns true if story exists"
     return stories.value_exists(title)
@@ -51,7 +57,7 @@ def get_new_part(title):
 def attach(old_part, new_part):
     if old_part == "":
         return new_part
-    return old_part + "\n" + new_part
+    return old_part + "\n\n" + new_part
 
 def get_full_story(title):
     "returns the full text of story"

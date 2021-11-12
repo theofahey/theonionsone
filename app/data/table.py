@@ -18,62 +18,39 @@ class Table:
         self.c = db.cursor()
     
     def add_values(self, values):
-        '''
-        adds desired values
-        '''
+        "adds a row filled with values"
         question_marks = map(get_question_mark, values)
         value_string = list_to_string(question_marks)
         self.c.execute(f"INSERT INTO {self.table_name} VALUES {value_string}", values)
         self.db.commit()
     
     def set_value(self, search, field, value):
-        '''
-        sets targetted value using search and field
-        '''
+        "sets field of a row with a search_field of search to value"
         self.c.execute(f"UPDATE {self.table_name} SET {field} = ? WHERE {self.search_field} = ?", [value, search])
         self.db.commit()
     
     def get_main_values(self):
-        '''
-        fetches main values
-        '''
+        "returns a list of main fields"
         self.c.execute(f"SELECT {self.search_field} FROM {self.table_name}")
         value_lists = self.c.fetchall()
         return map(first, value_lists)
     
     def get_value_list(self, search, field):
-        '''
-        gets list of values
-        '''
         self.c.execute(f"SELECT {field} FROM {self.table_name} WHERE {self.search_field} = ?", [search])
         return self.c.fetchone()
     
     def get_value(self, search, field):
-        '''
-        gets first entry of desired values
-        '''
+        "returns the value of field for the row where search_field equals search"
         value_list = self.get_value_list(search, field)
         return value_list[0]
     
     def value_exists(self, search):
-        '''
-        returns boolean based on value search field existence
-        '''
+        "returns true if a row where search_field equals search exists"
         value_list = self.get_value_list(search, "1")
         return bool(value_list)
     
-    def clear(self):
-        '''
-        removes data
-        '''
-        self.c.execute(f"DELETE FROM {self.table_name}")
-        self.c.execute("VACUUM")
-        self.db.commit()
-    
     def create(self, field_names):
-        '''
-        creates TABLE for data
-        '''
+        "creates a table with field_names"
         fields = map(add_type, field_names)
         field_string = list_to_string(fields)
         self.c.execute(f"CREATE TABLE IF NOT EXISTS {self.table_name} {field_string}")
