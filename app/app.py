@@ -73,7 +73,7 @@ def check_register():
         password = request.form.get('password')
         con_password = request.form.get('confirm_password')
 
-        #checks password requirements against password confirmation and password existence; False means it fails requirements
+        #checks password requirements against password confirmation and password existence; False means it passes requirements
         password_conflict = (not bool(password)) or password != con_password
 
         #checks db for existing user and user existence; False means it passes requirements
