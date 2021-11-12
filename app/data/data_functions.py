@@ -24,14 +24,13 @@ def add_user(username, password):
     edited_stories = Table(data, username, "title")
     edited_stories.create(["title"])
 
+def get_titles():
+    return stories.get_main_values()
+
 def get_edited_stories(username):
     "returns a list of titles of stories edited by user"
     edited_stories = Table(data, username, "title")
     return edited_stories.get_main_values()
-
-def get_titles():
-    "returns a list of titles of stories"
-    return stories.get_main_values()
 
 def get_unedited_stories(username):
     "returns a list of titles of stories not edited by user"
